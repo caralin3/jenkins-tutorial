@@ -18,17 +18,14 @@ pipeline {
             }
         }
         stage('Build') {
-            steps {
-                dir("jenkins-test-sync") {
-                    try {
-                        sh './gradlew build'
-                    }
-                    catch(Exception e) {
-                        echo 'Error ${e.getMessage()} occurred.'
-                        e.printStackTrace();
-                    }
+            dir("jenkins-test-sync") {
+                try {
+                    sh './gradlew build'
                 }
-
+                catch(Exception e) {
+                    echo 'Error ${e.getMessage()} occurred.'
+                    e.printStackTrace();
+                }
             }
         }
         stage('Test') {
