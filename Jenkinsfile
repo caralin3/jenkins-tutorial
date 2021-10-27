@@ -15,7 +15,7 @@ pipeline {
     post {
         always {
             archiveArtifacts artifacts: 'app/build/libs/**/*.jar', fingerprint: true
-            junit 'app/build/reports/**/*.xml'
+            junit allowEmptyResults: true, testResults: 'app/build/reports/**/*.xml'
         }
     }
 }
