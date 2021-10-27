@@ -1,16 +1,6 @@
 pipeline {
     agent any
     stages {
-//         stage('Build') {
-//             steps {
-//                 sh './gradlew build'
-//             }
-//         }
-//         stage('Test') {
-//             steps {
-//                 sh './gradlew test'
-//             }
-//         }
         stage('Checkout') {
             steps {
                 echo 'Cloning project...'
@@ -18,8 +8,9 @@ pipeline {
             }
         }
         stage('Build') {
-            dir("jenkins-test-sync") {
+            steps {
                 try {
+                    sh 'cd jenkins-test-sync'
                     sh './gradlew build'
                 }
                 catch(Exception e) {
@@ -29,8 +20,9 @@ pipeline {
             }
         }
         stage('Test') {
-            dir("jenkins-test-sync") {
+            steps {
                 try {
+                    sh 'cd jenkins-test-sync'
                     sh './gradlew test'
                 }
                 catch(Exception e) {
@@ -39,11 +31,6 @@ pipeline {
                 }
             }
         }
-//         stage('Cleanup') {
-//             steps {
-//                 cleanWs();
-//             }
-//         }
     }
     post {
         always {
