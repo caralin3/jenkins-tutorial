@@ -9,25 +9,29 @@ pipeline {
         }
         stage('Build') {
             steps {
-                try {
-                    sh 'cd jenkins-test-sync'
-                    sh './gradlew build'
-                }
-                catch(Exception e) {
-                    echo 'Error ${e.getMessage()} occurred.'
-                    e.printStackTrace();
+                script {
+                    try {
+                        sh 'cd jenkins-test-sync'
+                        sh './gradlew build'
+                    }
+                    catch(Exception e) {
+                        echo 'Error ${e.getMessage()} occurred.'
+                        e.printStackTrace();
+                    }
                 }
             }
         }
         stage('Test') {
             steps {
-                try {
-                    sh 'cd jenkins-test-sync'
-                    sh './gradlew test'
-                }
-                catch(Exception e) {
-                    echo 'Error ${e.getMessage()} occurred.'
-                    e.printStackTrace();
+                script {
+                    try {
+                        sh 'cd jenkins-test-sync'
+                        sh './gradlew test'
+                    }
+                    catch(Exception e) {
+                        echo 'Error ${e.getMessage()} occurred.'
+                        e.printStackTrace();
+                    }
                 }
             }
         }
