@@ -4,7 +4,10 @@ pipeline {
         stage('Checkout') {
             steps {
                 echo 'Cloning project...'
-                sh 'git clone --single-branch --branch master git@github.com:caralin3/jenkins-test-sync.git'
+                git branch: 'master'
+                    credentialsId: 'git-hub-key'
+                    url: 'ssh://git@github.com:caralin3/jenkins-test-sync.git'
+                sh 'ls pwd'
             }
         }
         stage('Build') {
